@@ -1,0 +1,165 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "description": "Esta é a documentação basica da api Tagfinder, ela será melhorada a medida que avançarmos nos artigos do blog, tornando-se decente a medida que passarem as semanas. O artigo referente a esta API pode se encontrado no blog [https://farlley.com](https://farlley.com)",
+        "version": "0.0.0",
+        "title": "Tagfinder",
+        "contact": {
+            "email": "farlley@live.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "schemes": [
+        "http"
+    ],
+    "host": "localhost:5000",
+    "basePath": "/tag",
+    "tags": [
+        {
+            "name": "tag",
+            "description": "Access to Petstore orders"
+        }
+    ],
+    "paths": {
+        "/ping": {
+            "get": {
+                "tags": [
+                    "tag"
+                ],
+                "summary": "Retorna teste de ping da api",
+                "description": "Realiza uma chamada de ping para a api",
+                "operationId": "ping",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/create": {
+            "post": {
+                "tags": [
+                    "tag"
+                ],
+                "summary": "Cria lista de hashtags a partir de um texto (seed)",
+                "description": "Cria lista de hashtags a partir de um texto (seed), utilizando o metodo tf idf (term frequency–inverse document frequency).",
+                "operationId": "create",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "requestBody": {
+                    "description": "Pet object that needs to be added to the store",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "corpus": {
+                                        "type": "string",
+                                        "example": "um teste qualquer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "unsuccessful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "unhandled exception",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/validate": {
+            "post": {
+                "tags": [
+                    "tag"
+                ],
+                "summary": "Valida uma lista de hashtags no instagram",
+                "description": "Valida uma lista de hashtags no instagram, utilizando um crawler que busca as tags através de uma falha de segurança (mudar para api do facebook na versão final).",
+                "operationId": "validate",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "requestBody": {
+                    "description": "Pet object that needs to be added to the store",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "tag_list": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": [
+                                            "instagood",
+                                            "instafood",
+                                            "domingou",
+                                            "love",
+                                            "life",
+                                            "tagfinder"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "unsuccessful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "unhandled exception",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
